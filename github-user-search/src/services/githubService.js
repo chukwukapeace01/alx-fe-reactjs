@@ -1,14 +1,12 @@
 import axios from "axios";
 
-const api = axios.create({
-  baseURL: "https://api.github.com",
-});
-
 export async function fetchUserData(username) {
   const name = username.trim();
   if (!name) throw new Error("No username");
 
-  const res = await api.get(`/users/${encodeURIComponent(name)}`);
+  const res = await axios.get(
+    `https://api.github.com/users/${encodeURIComponent(name)}`
+  );
   return res.data;
 }
 
@@ -28,14 +26,20 @@ export async function searchUsers({ username, location, minRepos, page = 1 }) {
 
   const q = terms.join(" ");
 
-  const res = await api.get("/search/users", {
-    params: { q, per_page: 10, page },
+  const res = await axios.get("https://api.github.com/search/users", {
+    params: {
+      q,
+      per_page: 10,
+      page,
+    },
   });
 
   return res.data;
 }
 
 export async function fetchUserDetails(login) {
-  const res = await api.get(`/users/${encodeURIComponent(login)}`);
+  const res = await axios.get(
+    `https://api.github.com/users/${encodeURIComponent(login)}`
+  );
   return res.data;
 }
