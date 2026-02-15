@@ -20,12 +20,12 @@ function HomePage() {
             <div className="p-4">
               <h2 className="text-xl font-semibold mb-2">{recipe.title}</h2>
               <p className="text-gray-600 mb-4">{recipe.summary}</p>
-              <a
-                href={`/recipe/${recipe.id}`}
-                className="text-blue-500 hover:text-blue-700 font-medium"
+              <Link
+                to={`/recipe/${recipe.id}`}
+                 className="text-blue-500 hover:text-blue-700 font-medium"
               >
                 View Details →
-              </a>
+              </Link>
             </div>
           </div>
         ))}
