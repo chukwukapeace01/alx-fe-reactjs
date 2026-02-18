@@ -26,7 +26,6 @@ const Profile = () => {
       </nav>
 
       <div style={{ padding: '1rem', border: '1px solid #ccc', borderRadius: '8px' }}>
-        {/* Nested routes render here */}
         <Outlet />
       </div>
     </div>
