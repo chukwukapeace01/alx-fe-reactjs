@@ -24,9 +24,12 @@ function PostsComponent() {
     queryKey: ['posts'],
     queryFn: fetchPosts,
     staleTime: 1000 * 60 * 2,
+    cacheTime: 1000 * 60 * 10,
+    refetchOnWindowFocus: true,
+    keepPreviousData: true,
     retry: 2,
   });
-
+  
   const handleRefetch = () => {
     queryClient.invalidateQueries({ queryKey: ['posts'] });
   };
