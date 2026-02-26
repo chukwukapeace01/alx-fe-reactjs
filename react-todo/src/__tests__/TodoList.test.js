@@ -4,8 +4,7 @@ import '@testing-library/jest-dom';
 import TodoList from '../components/TodoList';
 
 describe('TodoList Component', () => {
-
-  test('renders the TodoList component', () => {
+  test('renders TodoList component', () => {
     render(<TodoList />);
     expect(screen.getByText('Todo List')).toBeInTheDocument();
   });
@@ -19,19 +18,16 @@ describe('TodoList Component', () => {
 
   test('adds a new todo item', () => {
     render(<TodoList />);
-    const input = screen.getByTestId('todo-input');
-    const button = screen.getByTestId('add-todo-btn');
-
-    fireEvent.change(input, { target: { value: 'New Todo' } });
-    fireEvent.click(button);
-
-    expect(screen.getByText('New Todo')).toBeInTheDocument();
+    fireEvent.change(screen.getByTestId('todo-input'), {
+      target: { value: 'New Todo Item' },
+    });
+    fireEvent.click(screen.getByTestId('add-todo-btn'));
+    expect(screen.getByText('New Todo Item')).toBeInTheDocument();
   });
 
-  test('toggles a todo item completion status', () => {
+  test('toggles a todo item', () => {
     render(<TodoList />);
     const todoText = screen.getByTestId('todo-text-1');
-
     expect(todoText).toHaveAttribute('data-completed', 'false');
     fireEvent.click(todoText);
     expect(todoText).toHaveAttribute('data-completed', 'true');
@@ -42,5 +38,4 @@ describe('TodoList Component', () => {
     fireEvent.click(screen.getByTestId('delete-btn-1'));
     expect(screen.queryByText('Learn React')).not.toBeInTheDocument();
   });
-
 });

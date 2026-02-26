@@ -1,43 +1,35 @@
 import React from 'react';
 
-const TodoItem = ({ todo, onToggle, onDelete }) => {
+function TodoItem({ todo, toggleTodo, deleteTodo }) {
+  const handleDelete = () => {
+    deleteTodo(todo.id);
+  };
+
+  const handleToggle = () => {
+    toggleTodo(todo.id);
+  };
+
   return (
-    <li
-      data-testid="todo-item"
-      style={{
-        display: 'flex',
-        alignItems: 'center',
-        gap: '10px',
-        padding: '8px 0',
-      }}
-    >
+    <li data-testid="todo-item">
       <span
-        onClick={() => onToggle(todo.id)}
-        style={{ cursor: 'pointer', flexGrow: 1,
-          textDecoration: todo.completed ? 'line-through' : 'none',
-          color: todo.completed ? '#888' : '#000',
-        }}
+        onClick={handleToggle}
         data-testid={`todo-text-${todo.id}`}
-        data-completed={todo.completed}
+        data-completed={String(todo.completed)}
+        style={{
+          cursor: 'pointer',
+          textDecoration: todo.completed ? 'line-through' : 'none',
+        }}
       >
         {todo.text}
       </span>
       <button
-        onClick={() => onDelete(todo.id)}
+        onClick={handleDelete}
         data-testid={`delete-btn-${todo.id}`}
-        style={{
-          background: '#e74c3c',
-          color: 'white',
-          border: 'none',
-          borderRadius: '4px',
-          padding: '4px 10px',
-          cursor: 'pointer',
-        }}
       >
         Delete
       </button>
     </li>
   );
-};
+}
 
 export default TodoItem;
