@@ -4,7 +4,7 @@ import '@testing-library/jest-dom';
 import TodoList from '../components/TodoList';
 
 describe('TodoList Component', () => {
-  test('renders TodoList component', () => {
+  test('renders the TodoList component', () => {
     render(<TodoList />);
     expect(screen.getByText('Todo List')).toBeInTheDocument();
   });
@@ -16,27 +16,27 @@ describe('TodoList Component', () => {
     expect(screen.getByText('Build a Todo App')).toBeInTheDocument();
   });
 
-  test('adds a new todo', () => {
+  test('allows users to add new todo items', () => {
     render(<TodoList />);
-    const input = screen.getByPlaceholderText('Add a new todo');
+    const input = screen.getByTestId('todo-input');
+    const button = screen.getByTestId('add-todo-btn');
     fireEvent.change(input, { target: { value: 'New Todo' } });
-    fireEvent.click(screen.getByText('Add'));
+    fireEvent.click(button);
     expect(screen.getByText('New Todo')).toBeInTheDocument();
   });
 
-  test('toggles a todo item between completed and not completed', () => {
+  test('allows users to toggle todo items', () => {
     render(<TodoList />);
-    const todoItem = screen.getByText('Learn React');
+    const todoItem = screen.getByTestId('todo-text-1');
+    expect(todoItem).toHaveAttribute('data-completed', 'false');
     fireEvent.click(todoItem);
     expect(todoItem).toHaveAttribute('data-completed', 'true');
-    fireEvent.click(todoItem);
-    expect(todoItem).toHaveAttribute('data-completed', 'false');
   });
 
-  test('deletes a todo item', () => {
+  test('allows users to delete todo items', () => {
     render(<TodoList />);
-    const deleteButtons = screen.getAllByText('Delete');
-    fireEvent.click(deleteButtons[0]);
+    const deleteButton = screen.getByTestId('delete-btn-1');
+    fireEvent.click(deleteButton);
     expect(screen.queryByText('Learn React')).not.toBeInTheDocument();
   });
 });

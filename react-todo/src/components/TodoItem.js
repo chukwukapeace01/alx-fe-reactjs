@@ -1,6 +1,6 @@
 import React from 'react';
 
-function TodoItem({ todo, toggleTodo, deleteTodo }) {
+const TodoItem = ({ todo, toggleTodo, deleteTodo }) => {
   return (
     <li
       data-testid="todo-item"
@@ -22,6 +22,6 @@ function TodoItem({ todo, toggleTodo, deleteTodo }) {
       </button>
     </li>
   );
-}
+};
 
 export default TodoItem;
