@@ -1,29 +1,21 @@
 import React from 'react';
 
 function TodoItem({ todo, toggleTodo, deleteTodo }) {
-  const handleDelete = () => {
-    deleteTodo(todo.id);
-  };
-
-  const handleToggle = () => {
-    toggleTodo(todo.id);
-  };
-
   return (
-    <li data-testid="todo-item">
+    <li
+      data-testid="todo-item"
+      style={{ textDecoration: todo.completed ? 'line-through' : 'none' }}
+    >
       <span
-        onClick={handleToggle}
+        onClick={() => toggleTodo(todo.id)}
         data-testid={`todo-text-${todo.id}`}
         data-completed={String(todo.completed)}
-        style={{
-          cursor: 'pointer',
-          textDecoration: todo.completed ? 'line-through' : 'none',
-        }}
+        style={{ cursor: 'pointer' }}
       >
         {todo.text}
       </span>
       <button
-        onClick={handleDelete}
+        onClick={() => deleteTodo(todo.id)}
         data-testid={`delete-btn-${todo.id}`}
       >
         Delete
