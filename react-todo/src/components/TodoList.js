@@ -17,9 +17,11 @@ function TodoList() {
   };
 
   const toggleTodo = (id) => {
-    setTodos(todos.map((todo) =>
-      todo.id === id ? { ...todo, completed: !todo.completed } : todo
-    ));
+    setTodos(
+      todos.map((todo) =>
+        todo.id === id ? { ...todo, completed: !todo.completed } : todo
+      )
+    );
   };
 
   const deleteTodo = (id) => {
