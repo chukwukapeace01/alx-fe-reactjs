@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import TodoItem from './TodoItem';
 import AddTodoForm from './AddTodoForm';
+import TodoItem from './TodoItem';
 
 const initialTodos = [
   { id: 1, text: 'Learn React', completed: false },
@@ -17,26 +17,26 @@ const TodoList = () => {
       text,
       completed: false,
     };
-    setTodos((prev) => [...prev, newTodo]);
+    setTodos([...todos, newTodo]);
   };
 
   const toggleTodo = (id) => {
-    setTodos((prev) =>
-      prev.map((todo) =>
+    setTodos(
+      todos.map((todo) =>
         todo.id === id ? { ...todo, completed: !todo.completed } : todo
       )
     );
   };
 
   const deleteTodo = (id) => {
-    setTodos((prev) => prev.filter((todo) => todo.id !== id));
+    setTodos(todos.filter((todo) => todo.id !== id));
   };
 
   return (
-    <div data-testid="todo-list-container" style={{ maxWidth: '500px', margin: '40px auto', fontFamily: 'Arial' }}>
+    <div data-testid="todo-list-container">
       <h1>Todo List</h1>
       <AddTodoForm onAdd={addTodo} />
-      <ul data-testid="todo-list" style={{ listStyle: 'none', padding: 0, marginTop: '20px' }}>
+      <ul data-testid="todo-list">
         {todos.length === 0 ? (
           <p data-testid="empty-message">No todos yet. Add one above!</p>
         ) : (
